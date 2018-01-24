@@ -28,7 +28,7 @@ int main()
 
 	//input
 	printf("Please enter a five digit number: ");
-	scanf("%d", &inputNum);
+	scanf("%5d", &inputNum);
 	bufferNum = inputNum;
 
 	//output
