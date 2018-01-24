@@ -3,8 +3,8 @@
 /*******************************************
 /* Lecture 2
 /*
-/* This program prints an integer and float
-/* using different formas using printf
+/* This program print the sum
+/* and average of three numbers
 /*
 /* Lab01
 /*
