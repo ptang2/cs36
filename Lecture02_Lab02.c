@@ -3,10 +3,10 @@
 /*******************************************
 /* Lecture 2
 /*
-/* This program print the sum
-/* and average of three numbers
+/* This program prints an integer and float
+/* using different formas using printf
 /*
-/* Lab01
+/* Lab02
 /*
 /* Peter Tang
 /* 959213

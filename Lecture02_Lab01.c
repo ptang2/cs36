@@ -3,40 +3,45 @@
 /*******************************************
 /* Lecture 2
 /*
-/* This program prints an integer and float
-/* using different formas using printf
+/* This program print the sum
+/* and average of three numbers
 /*
 /* Lab01
 /*
 /* Peter Tang
 /* 959213
-/* 1/23/18
+/* 1/16/18
 *******************************************/
 
 int main()
 {
 	//declaration
-    int i;
-	float x;
+    int a, b, c;
+	int sum;
+	float avg;
 
 	//data
-	i = 40;
-	x = 839.21;
+    a = 10;
+    b = 20;
+	c = 30;
 
 	//calculation
+    sum = a + b + c;
+	avg = sum / 3;
 
 	//output
-	printf("|%d|%*d|%-5d|%5.3d|\n", i, 5, i, i, i, i);
-	printf("|%10.3f|%10.3e|%-10g|\n", x, x, x);
+	printf("The 3 numbers are %d %d %d\n", a, b, c);
+    printf("The sum is %d\n", sum);
+	printf("The average is %0.2f\n", avg);
 
     return 0;
 }
 
 /*
-|40|   40|40   |  040|
-|   839.210|8.392e+002|839.21    |
+The 3 numbers are 10 20 30
+The sum is 60
+The average is 20.00
 
-Process returned 0 (0x0)   execution time : 0.031 s
+Process returned 0 (0x0)   execution time : 0.039 s
 Press any key to continue.
-
 */
