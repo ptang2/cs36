@@ -1,18 +1,21 @@
 #include<stdio.h>
 
 /*******************************************
-/* Lecture 2
+/* Lecture 3
 /*
 /* This program prompts for and outputs
 /* the user's name, and three numbers.
 /* Then, the program calculates and outputs
 /* the sum and average of three numbers
 /*
-/* Lab03
+/* The point of this program is to exercise
+/* flushing the input buffer
+/*
+/* Lab01
 /*
 /* Peter Tang
 /* 959213
-/* 1/23/18
+/* 1/30/18
 *******************************************/
 
 int main()
@@ -37,27 +40,32 @@ int main()
 	sum = a + b + c;
 	avg = sum / (float)3;
 
+	getchar();
+	printf("Please enter another name: ");
+	gets(name);
+
 	//output
 	printf("\n%s, you entered %d %d %d.\n", name, a, b, c);
 	printf("\nThe sum is %d.\n", sum);
 	printf("The average is %.2f.\n", avg);
 
-
     return 0;
 }
 
 /*
-Please enter a name: Peter Tang
-Please enter the first number:   10
-Please enter the second number:  20
-Please enter the third number:   30
+Please enter a name: first name
+Please enter the first number:   1
+Please enter the second number:  2
+Please enter the third number:   3
+Please enter another name: second name
 
-Peter Tang, you entered 10 20 30.
+second name, you entered 1 2 3.
 
-The sum is 60.
-The average is 20.00.
+The sum is 6.
+The average is 2.00.
 
-Process returned 0 (0x0)   execution time : 9.111 s
+Process returned 0 (0x0)   execution time : 9.108 s
 Press any key to continue.
+
 
 */

@@ -1,0 +1,5 @@
+a) Total miles driven per day.
+b) Cost per gallon of gasoline.
+c) Average miles per gallon.
+d) Parking fees per day.
+e) Tolls per day.
