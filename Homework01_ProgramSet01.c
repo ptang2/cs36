@@ -21,14 +21,13 @@ int main()
 	//DECLARATION
 
 	//constant declarations
-    const double PI = 22/(double)7;
-    const int OUTPUT_COL = 40;
+	const double PI = 22/(double)7;
+	const int OUTPUT_COL = 40;
 
-    float radius;
+	float radius;
 
-    //INPUT
-
-    //using scanf to input a number
+	//INPUT
+	//using scanf to input a number
 	printf("Please enter the radius of the circle: ");
 	scanf("%f", &radius);
 
@@ -36,12 +35,12 @@ int main()
 
 	//outpoutting result of literal arithmetic
 	printf("\nThe radius of the circle is %.5f.\n", radius);
-	printf("The diameter of the circle is %.5f.\n", radius*2);
-	printf("The area of the circle is %.5f.\n", PI*radius*radius);
-	printf("The circumference is %.5f.\n", 2*PI*radius);
+	printf("The diameter of the circle is %.5f.\n", radius * 2);
+	printf("The area of the circle is %.5f.\n", PI * radius * radius);
+	printf("The circumference is %.5f.\n", 2 * PI * radius);
 
 
-    return 0;
+	return 0;
 }
 
 /*

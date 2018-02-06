@@ -27,38 +27,39 @@ int main()
 {
 	//DECLARATION
 
-    int milesPerDay;
-    float costPerGallon;
-    int avgMilesPerGallon;
-    float parkingFeesPerDay;
-    float tollsPerDay;
+	const int INPUT_COL = 28;
+	
+	int milesPerDay;
+	float costPerGallon;
+	int avgMilesPerGallon;
+	float parkingFeesPerDay;
+	float tollsPerDay;
+	float totalDailyDrivingCost;
 
-    float totalDailyDrivingCost;
+	//INPUT
 
-    //INPUT
-
-    //prompts for and receives input via scanf to capture input data
-	printf("%-29s", "Total miles driven per day:");
+	//prompts for and receives input via scanf to capture input data
+	printf("%*s: ", INPUT_COL, "Total miles driven per day");
 	scanf("%d", &milesPerDay);
 
-	printf("%-29s", "Cost per gallon of gasoline:");
+	printf("%*s: $", INPUT_COL, "Cost per gallon of gasoline");
 	scanf("%f", &costPerGallon);
 
-	printf("%-29s", "Average miles per gallon:");
+	printf("%*s: ", INPUT_COL, "Average miles per gallon");
 	scanf("%d", &avgMilesPerGallon);
 
-	printf("%-29s", "Parking fees per day:");
+	printf("%*s: $", INPUT_COL, "Parking fees per day");
 	scanf("%f", &parkingFeesPerDay);
 
-	printf("%-29s", "Tolls per day:");
+	printf("%*s: $", INPUT_COL, "Tolls per day");
 	scanf("%f", &tollsPerDay);
 
 	//CALCULATIONS
 
 	totalDailyDrivingCost =
-        tollsPerDay +
-        parkingFeesPerDay +
-        (milesPerDay/(float)avgMilesPerGallon) * costPerGallon;
+		tollsPerDay +
+		parkingFeesPerDay +
+		(milesPerDay/(float)avgMilesPerGallon) * costPerGallon;
 
 	//OUTPUT
 
@@ -71,24 +72,20 @@ int main()
 	printf("Your daily cost of driving to work is $ %.2f\n", totalDailyDrivingCost);
 
 
-    return 0;
+	return 0;
 }
 
 /*
-Total miles driven per day:  100
-Cost per gallon of gasoline: 3
-Average miles per gallon:    19
-Parking fees per day:        3
-Tolls per day:               4
+  Total miles driven per day: 100
+ Cost per gallon of gasoline: $3.00
+    Average miles per gallon: 19
+        Parking fees per day: $3.00
+               Tolls per day: $4.00
 
 The total miles driven per day: 100
 The cost per gallon of gasoline: $ 3.00
 The average miles per gallon: 19 mph
 The parking fees per day: $ 3.00
 The tolls per day: $4.00
-
 Your daily cost of driving to work is $ 22.79
-Process returned 0 (0x0)   execution time : 29.239 s
-Press any key to continue.
-
 */
