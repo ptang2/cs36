@@ -105,8 +105,24 @@ int main()
 
     //TODO input source selection
 
-
-
+	//OUTPUT DESTINATION CITY MENU
+	printf("\n\n\n");
+	printf(" ENTER THE DESINATION CITY :\n\n");
+	printf(" D for Denver\n\n");
+	printf(" M for Madison\n\n");
+	printf(" C for Clarksville\n\n");
+	printf(" K for Knoxville\n\n\n");
+	
+	//TODO input destination selection
+	
+	//OUTPUT TRANSPORT MENU
+	printf("\n\n\n");
+	printf(" ENTER THE MODE OF TRANSPORT\n\n");
+	printf(" D for Denver\n\n");
+	printf(" M for Madison\n\n");
+	printf(" C for Clarksville\n\n");
+	printf(" K for Knoxville\n\n\n");
+	
 
 	//OUTPUT
     printStars(5);
