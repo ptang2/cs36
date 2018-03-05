@@ -1,5 +1,5 @@
 if __name__ == "__main__":
-    with open ("hw2input.txt", 'w') as fout, open("hw2output.txt", 'r') as fin:
+    with open ("hw2input.txt", 'r') as fin, open("hw2output.txt", 'w') as fout:
         si = 0
         di = 0
         ti = 0
@@ -8,16 +8,17 @@ if __name__ == "__main__":
         translist = ['AIR', 'TRAIN', 'BUS']
         count = 0
         for line in fin:
-            fout.write("costDB[{}][{}][{}] = {}\n".format(sourcelist[si], destlist[di], translist[ti], line.strip())
-            count += 1
-            if(count >11)
-                si += 1
-            if(count != 0 && count % 4 == 0)
-                di += 1
-            else
-                di = 0
-            if(count != 0 && count % 3 == 0)
-                ti += 1
-            else
-                ti = 0
+            if line.strip():
+                print("{}: {} {} {}".format(count, si, di, ti))
+                fout.write("costDB[{}][{}][{}] = {}\n".format(sourcelist[si], destlist[di], translist[ti], line.strip()))
+                count += 1
+                if(count != 0 and count % 12 == 0):
+                    si += 1
+                    di = 0
+                elif(count != 0 and count % 3 == 0):
+                    di += 1
+                if(count != 0 and count % 3 == 0):
+                    ti = 0
+                else:
+                    ti += 1
     fout.close
