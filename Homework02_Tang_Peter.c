@@ -322,8 +322,7 @@ int main()
 	printf("\n\n TOTAL CHARGES = %.2f\n\n\n", thisTrip.transCharges + thisTrip.hotelCharges + thisTrip.foodCharges);
 	printStars(EXPENSE_BANNER_LENGTH);
 	puts("");
-
-
+	getchar();
 
 	return 0; 
 }
@@ -519,3 +518,108 @@ void initTransportCost(double costDB[][TOTAL_DESTINATION_CITIES][TOTAL_TRANS_TYP
 	costDB[PASADENA][CLARKSON][BUS] = 1300;
 }
 
+/* RESULTS
+
+
+
+ **********************************************************
+
+
+ TOTAL EXPENSES TO TRAVEL FROM Baltimore TO Denver :
+
+
+ **********************************************************
+
+
+ TRANSPORTATION CHARGES = 5000.00
+
+ NUMBER OF DAYS OF STAY = 1
+
+ NUMBER OF MEALS IN A DAY = 1
+
+ ROOM CHARGES = 500.00 / DAY
+
+ FOOD CHARGES = 15.00
+
+ HOTEL CHARGES = 500.00
+
+
+ **********************************************************
+
+
+ TOTAL CHARGES = 5515.00
+
+
+ **********************************************************
+
+
+ 
+ 
+
+ **********************************************************
+
+
+ TOTAL EXPENSES TO TRAVEL FROM Chattanooga TO Madison :
+
+
+ **********************************************************
+
+
+ TRANSPORTATION CHARGES = 2300.00
+
+ NUMBER OF DAYS OF STAY = 2
+
+ NUMBER OF MEALS IN A DAY = 2
+
+ ROOM CHARGES = 300.00 / DAY
+
+ FOOD CHARGES = 120.00
+
+ HOTEL CHARGES = 600.00
+
+
+ **********************************************************
+
+
+ TOTAL CHARGES = 3020.00
+
+
+ **********************************************************
+
+
+ 
+ 
+
+
+ **********************************************************
+
+
+ TOTAL EXPENSES TO TRAVEL FROM Pasadena TO Knoxville :
+
+
+ **********************************************************
+
+
+ TRANSPORTATION CHARGES = 800.00
+
+ NUMBER OF DAYS OF STAY = 3
+
+ NUMBER OF MEALS IN A DAY = 2
+
+ ROOM CHARGES = 100.00 / DAY
+
+ FOOD CHARGES = 90.00
+
+ HOTEL CHARGES = 300.00
+
+
+ **********************************************************
+
+
+ TOTAL CHARGES = 1190.00
+
+
+ **********************************************************
+
+
+*/
