@@ -1,6 +1,8 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <stdarg.h>
+#include <string.h>
+#include <ctype.h>
 
 /*******************************************
 /* Homework 02
@@ -103,7 +105,7 @@ void printStars(int num);
 * Returns: user input option
 *
 ***************************************/
-char getInput(int, char*, ...);
+char getInput(char*,int, ...);
 
 /***************************************
 * void clearBuffer()
@@ -124,7 +126,7 @@ void clearBuffer(char);
 *
 * Returns: propagated array with data
 ***************************************/
-void initTransportCost(int costDB[]
+void initTransportCost(double costDB[]
                        [TOTAL_DESTINATION_CITIES]
                        [TOTAL_TRANS_TYPES]);
 
@@ -146,9 +148,11 @@ struct Trip
 	enum TransType transType;
 	enum HotelType hotelType;
 	enum MealType mealType;
-	double transCharges;
 	int numDaysStay;
 	int numMealsDay;
+	int hotelValue;	
+	int mealValue;
+	double transCharges;
 	double roomCharges;
 	double foodCharges;
 	double hotelCharges;
@@ -172,7 +176,7 @@ int main()
 		"Non-Veg", "Continental"};
 
     //VAR DECLARATIONS
-    int transCostDB[TOTAL_SOURCE_CITIES]
+    double transCostDB[TOTAL_SOURCE_CITIES]
             [TOTAL_DESTINATION_CITIES]
             [TOTAL_TRANS_TYPES];
 	struct Trip thisTrip;
@@ -184,22 +188,23 @@ int main()
 	initTransportCost(transCostDB);
 
 	//OUTPUT SPLASH MENU
-	system("clear");
-	printf("\n\n\n\n ");
+	system("cls");
+	printf("\n\n\n");
 	printStars(SPLASH_BANNER_LENGTH);
-	printf("\n\n\n WELCOME TO THE TRIP EXPENSE CALCULATOR\n\n\n\n ");
+	printf("\n\n\n WELCOME TO THE TRIP EXPENSE CALCULATOR\n\n\n\n");
 	printStars(SPLASH_BANNER_LENGTH);
 	printf("\n ");
 	clearBuffer(getchar());
-	system("clear");
+	system("cls");
 
 
 	//OUTPUT SOURCE CITY MENU
-	inputChar = getInput(4, "ENTER THE SOURCE CITY :", 
-			"B", SOURCE_CITIES[BALTIMORE], 
-			"C", SOURCE_CITIES[CHATTANOOGA], 
-			"N", SOURCE_CITIES[NASHVILLE], 
-			"P", SOURCE_CITIES[PASADENA]); 
+	inputChar = getInput("ENTER THE SOURCE CITY :",
+		4,
+		"B", SOURCE_CITIES[BALTIMORE], 
+		"C", SOURCE_CITIES[CHATTANOOGA], 
+		"N", SOURCE_CITIES[NASHVILLE], 
+		"P", SOURCE_CITIES[PASADENA]); 
 
 	//PROCESS SOURCE INPUT switch (inputChar)
 	switch(inputChar)
@@ -211,11 +216,12 @@ int main()
 	}
 
 	//OUTPUT DESTINATION CITY MENU
-	getInput(4, "ENTER THE DESINATION CITY :",
-          "D", DEST_CITIES[DENVER], 
-		  "M", DEST_CITIES[MADISON], 
-		  "C", DEST_CITIES[CLARKSON],
-          "K", DEST_CITIES[KNOXVILLE]);
+	inputChar = getInput("ENTER THE DESINATION CITY :", 
+		4,
+        "D", DEST_CITIES[DENVER], 
+		"M", DEST_CITIES[MADISON], 
+		"C", DEST_CITIES[CLARKSON],
+        "K", DEST_CITIES[KNOXVILLE]);
 
 	//PROCESS DEST
 	switch(inputChar)
@@ -227,10 +233,11 @@ int main()
 	}
 
 	//OUTPUT TRANSPORT MENU
-    getInput(3, "ENTER THE MODE OF TRANSPORT :",
-      "A", TRANS_TYPE[AIR],
-	  "R", TRANS_TYPE[TRAIN],
-      "B", TRANS_TYPE[BUS]);
+    inputChar = getInput("ENTER THE MODE OF TRANSPORT :",
+		3,
+      	"A", TRANS_TYPE[AIR],
+	  	"R", TRANS_TYPE[TRAIN],
+      	"B", TRANS_TYPE[BUS]);
 	
 	//PROCESS TRANSPORT
 	switch(inputChar)
@@ -241,45 +248,80 @@ int main()
 	}
     
 	//OUTPUT HOTEL MENU
-    getInput(3, "ENTER THE TYPE OF HOTEL :",
-             "F", HOTEL_TYPE[FIVE_STARS],
-             "T", HOTEL_TYPE[THREE_STARS],
-             "O", HOTEL_TYPE[ORDINARY]);
+    inputChar = getInput("ENTER THE TYPE OF HOTEL :",
+		3,
+        "F", HOTEL_TYPE[FIVE_STARS],
+        "T", HOTEL_TYPE[THREE_STARS],
+        "O", HOTEL_TYPE[ORDINARY]);
 
 	//PROCESS HOTEL
 	switch(inputChar)
 	{
-		case 'F': thisTrip.hotelType = FIVE_STARS; break;
-		case 'T': thisTrip.hotelType = THREE_STARS; break;
-		case 'O': thisTrip.hotelType = ORDINARY; 
+		case 'F': 
+			thisTrip.hotelType = FIVE_STARS; 
+			thisTrip.hotelValue = FIVE_STAR_VALUE;
+			break;
+		case 'T': 
+			thisTrip.hotelType = THREE_STARS;
+			thisTrip.hotelValue= THREE_STAR_VALUE;
+			break;
+		case 'O': 
+			thisTrip.hotelType = ORDINARY;
+			thisTrip.hotelValue = ORDINARY_VALUE;
 	}
 
     //OUTPUT DAYS PROMPT
-	thisTrip.numDaysStay = getInput(0, "ENTER THE NUMBER OF DAYS OF STAY");
+	thisTrip.numDaysStay = getInput("ENTER THE NUMBER OF DAYS OF STAY", 0);
 
     //OUTPUT FOOD MENU
-    thisTrip.mealType = getInput(3, "ENTER THE TYPE OF FOOD",
-             "V", VEG_TYPE[VEGETARIAN],
-             "N", VEG_TYPE[NON_VEGETARIAN],
-			 "C", VEG_TYPE[CONTINENTAL]);
+    inputChar = getInput("ENTER THE TYPE OF FOOD",
+		3,
+        "V", VEG_TYPE[VEGETARIAN],
+        "N", VEG_TYPE[NON_VEGETARIAN],
+		"C", VEG_TYPE[CONTINENTAL]);
 
 	//PROCESS FOOD INPUT
 	switch(inputChar)
 	{
-		case 'V': thisTrip.mealType = VEGETARIAN; break;
-		case 'N': thisTrip.mealType = NON_VEGETARIAN; break;
-		case 'C': thisTrip.mealType = CONTINENTAL;
+		case 'V': 
+			thisTrip.mealType = VEGETARIAN;
+			thisTrip.mealValue = VEGETARIAN_VALUE;
+			break;
+		case 'N': 
+			thisTrip.mealType = NON_VEGETARIAN;
+			thisTrip.mealValue = NON_VEGETARIAN_VALUE;
+			break;
+		case 'C': 
+			thisTrip.mealType = CONTINENTAL;
+			thisTrip.mealValue = CONTINENTAL_VALUE;
 	}
 
     //OUTPUT DAYS PROMPT
-	thisTrip.numMealsDay = getInput(0, "How many meals would you like to take in the Hotel?");
+	thisTrip.numMealsDay = getInput("How many meals would you like to take in the Hotel?", 0);
 
-	//TODO process days
+	//CALCULATIONS
+	thisTrip.transCharges = transCostDB[thisTrip.sourceCity][thisTrip.destCity][thisTrip.transType];
+	thisTrip.roomCharges = thisTrip.hotelValue;
+	thisTrip.hotelCharges = thisTrip.roomCharges * thisTrip.numDaysStay;
+	thisTrip.foodCharges = thisTrip.mealValue * thisTrip.numMealsDay * thisTrip.numDaysStay;
 
-	//OUTPUT
-	printStars(5);
-
-
+	//OUTPUT SUMMARY
+	printf("\n\n\n");
+	printStars(EXPENSE_BANNER_LENGTH); 
+	printf("\n\n TOTAL EXPENSES TO TRAVEL FROM %s TO %s :\n\n\n",
+			SOURCE_CITIES[thisTrip.sourceCity], DEST_CITIES[thisTrip.destCity]);
+	printStars(EXPENSE_BANNER_LENGTH);
+	printf("\n\n");
+	printf(" TRANSPORTATION CHARGES = %.2f\n\n", thisTrip.transCharges);
+	printf(" NUMBER OF DAYS OF STAY = %d\n\n", thisTrip.numDaysStay);
+	printf(" NUMBER OF MEALS IN A DAY = %d\n\n", thisTrip.numMealsDay);
+	printf(" ROOM CHARGES = %.2f / DAY\n\n", thisTrip.roomCharges);
+	printf(" FOOD CHARGES = %.2f\n\n", thisTrip.foodCharges);
+	printf(" HOTEL CHARGES = %.2f\n\n\n", thisTrip.hotelCharges);
+	printStars(EXPENSE_BANNER_LENGTH);
+	printf("\n\n TOTAL CHARGES = %.2f\n\n\n", thisTrip.transCharges + thisTrip.hotelCharges + thisTrip.foodCharges);
+	printStars(EXPENSE_BANNER_LENGTH);
+	puts("");
 
 
 
@@ -300,6 +342,7 @@ int main()
 void printStars(int num)
 {
     int i;
+	printf(" ");
     for(i = 0; i < num; i++)
         printf("*");
     puts("");
@@ -317,7 +360,7 @@ void printStars(int num)
 * Returns: user input option
 *
 ***************************************/
-char getInput(int numOptions, char* title, ...) 
+char getInput(char* title, int numOptions, ...) 
 {
    	int varIndex;					//index of each pair of option 
 	char* optionChar;				//buffer for char arg 
@@ -350,7 +393,7 @@ char getInput(int numOptions, char* title, ...)
         strcat(charBuffer, " for ");
         strcat(charBuffer, optionFull);
         strcat(charBuffer, "\n\n");
-
+		
 		optionCharList[varIndex]=optionChar[0];
     }
     strcat(charBuffer, "\n ");
@@ -361,7 +404,7 @@ char getInput(int numOptions, char* title, ...)
         printf("%s", charBuffer);
         inputChar = getchar();
         clearBuffer(inputChar);
-        system("clear");
+        system("cls");
 
     }while(inputChar == '\n' || numOptions == 0 && !isdigit(inputChar) ||
 			numOptions != 0 && !checkInputChar(toupper(inputChar), optionCharList, numOptions));
@@ -424,7 +467,7 @@ void clearBuffer(char input)
 *
 * Returns: propagated array with data
 ***************************************/
-void initTransportCost(int costDB[][TOTAL_DESTINATION_CITIES][TOTAL_TRANS_TYPES])
+void initTransportCost(double costDB[][TOTAL_DESTINATION_CITIES][TOTAL_TRANS_TYPES])
 {	
 	costDB[BALTIMORE][DENVER][AIR] = 5000;
 	costDB[BALTIMORE][DENVER][TRAIN] = 2500;
