@@ -10,7 +10,7 @@ if __name__ == "__main__":
         for line in fin:
             if line.strip():
                 print("{}: {} {} {}".format(count, si, di, ti))
-                fout.write("costDB[{}][{}][{}] = {}\n".format(sourcelist[si], destlist[di], translist[ti], line.strip()))
+                fout.write("costDB[{}][{}][{}] = {};\n".format(sourcelist[si], destlist[di], translist[ti], line.strip()))
                 count += 1
                 if(count != 0 and count % 12 == 0):
                     si += 1
