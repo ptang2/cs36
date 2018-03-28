@@ -70,6 +70,7 @@ int main()
     choices[7].nCol = 1;
     choices[8].aRow = 'A';
     choices[8].nCol = 1;
+
 	//INITIALIZATION
 	initBoard(board);
 
@@ -164,6 +165,52 @@ int printMenu(struct position choices[MAX_CHOICES], int numChoices)
     scanf("%d", &indexChoice);
 
     return indexChoice;
+}
+
+void getValidChoices(struct position currentPosition, struct position choices[MAX_CHOICES], int* numChoices)
+{
+    int count = 0;
+
+    //check top
+    if(currentPosition.nCol + 2 < NUM_COLS)
+    {
+        if(getIndex(currentPosition.aRow) - 1 >= 0)
+        {
+            choices[count].nCol = currentPosition.nCol + 2;
+            choices[count].aRow = currentPosition.aRow - 1;
+            count++;
+        }
+        if (getIndex(currentPosition.aRow) + 1 < NUM_ROWS)
+        {
+            choices[count].nCol = currentPosition.nCol + 2;
+            choices[count].aRow = currentPosition.aRow + 1;
+            count++;
+        }
+    }
+
+    if(getIndex(currentPosition.aRow) + 2 < NUM_ROWS)
+    {
+        if(currenPosition.nCol + 1 < NUM_COLS)
+        {
+            choices[count].aRow = currentPosition.aRow + 2;
+            choices[count].nCol = currentPosition.nCol + 1;
+            count++;
+        }
+        if(currentPosition.nCol - 1 >= 0)
+        {
+            choices[count].aRow = currentPosition.aRow + 2;
+            choices[count].nCol = currentPosition.nCol -1;
+        }
+    }
+
+
+
+
+}
+
+int getIndex(char letter)
+{
+    return letter - 'A';
 }
 
 /*
