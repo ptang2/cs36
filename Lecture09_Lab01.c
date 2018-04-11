@@ -1,9 +1,9 @@
 #include<stdio.h>
 
 /*******************************************
-/* Lecture 8 - Lab04
+/* Lecture 9 - Lab01
 /*
-/* This program exercises strings
+/* This program exercises pass by reference
 /*
 /* Peter Tang
 /* 959213
