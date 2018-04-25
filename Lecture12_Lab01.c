@@ -54,25 +54,39 @@ void swap(int array[], int i, int j)
 
 void quickSort(int array[], int beg, int end)
 {
-    int temp;
+    if(beg >= end)
+    return;
 
-    int pivot = array[end];
+    int temp, pivot, pivoti;
+
+    pivot = array[end];
+    pivoti = end;
+
+    int mid = array[(end - beg)/2];
+
+    if(pivot > array[beg])
+        if(array[mid] > array[beg]) {pivot = array[beg]; pivoti = beg;}
+        else {pivot = array[mid]; pivoti = mid;}
+
+
+    temp = array[end];
+    array[end] = pivot;
+    array[pivoti] = temp;
+
     int l = beg;
     int r = end - 1;
 
-    if(beg >= end)
-        return;
     while (l <= r)
     {
         while(array[l] <= pivot) l++;
         while(array[r] >= pivot) r--;
 
-        if(l <= r) swap(array, l, r);
+        if(l < r) swap(array, l, r);
     }
         printf("l: %d r: %d beg: %d end: %d\n", l, r, beg, end);
         printArray(array, end + 1);
 
-        if (l <= end) swap(array, l, end);
+        swap(array, l, end);
         quickSort(array, beg, l - 1);
         quickSort(array, l + 1, end);
 }
