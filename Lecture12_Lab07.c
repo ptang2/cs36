@@ -13,7 +13,6 @@
 
 int main()
 {
-
     int i = 0, size = 0, found = 1;
     char str[100];
 
