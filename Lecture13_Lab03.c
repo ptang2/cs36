@@ -38,9 +38,9 @@ int main()
 
     salary = 0;
 
+    salary = getSalary();
     while(salary >= 0)
     {
-        salary = getSalary();
         calcRaise(salary, &rate, &raise);
 
         printf("Salary: %d, Rate %: %.1f, Raise: %.2f, New Salary: %.2f\n\n", salary, rate, raise, raise + salary);
@@ -52,15 +52,17 @@ int main()
 }
 
 /*
-Enter coord of first point: 1 2
-Enter coord of second point: 2 3
+Please enter the salary (-1 to exit): 10
+Salary: 10, Rate : 7.0, Raise: 0.70, New Salary: 10.70
 
-The coord of the first point is: 1x 2y
-The coord of the second point is: 2x 3y
-The distance between the points is: 1.41
+Please enter the salary (-1 to exit): 30000
+Salary: 30000, Rate : 5.5, Raise: 1650.00, New Salary: 31650.00
 
-Process returned 0 (0x0)   execution time : 1.880 s
+Please enter the salary (-1 to exit): -1
+
+Process returned 0 (0x0)   execution time : 7.593 s
 Press any key to continue.
+
 
 
 */
