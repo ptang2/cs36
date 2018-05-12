@@ -1,6 +1,4 @@
 #include<stdio.h>
-#include <string.h>
-#include <ctype.h>
 #define MAX_CHOICES 8
 
 /*******************************************
@@ -11,7 +9,7 @@
 /*
 /* Peter Tang
 /* 959213
-/* 5/11/18
+/* 2/27/18
 *******************************************/
 
 //GLOBAL VARS
@@ -104,7 +102,7 @@ int main()
 	//Declarations
     char board[NUM_ROWS][NUM_COLS];
     struct position choices[MAX_CHOICES];
-    struct position currentPosition = {3,3};
+    struct position currentPosition = {7,7};
     int numChoices = 8;
     int userChoice = -1;
 
@@ -117,7 +115,7 @@ int main()
 	    userChoice = printMenu(choices, numChoices);
     }
 
-	//Cycle through input
+	//INITIALIZATION    
     while(userChoice != 0)
     {
         //Update current position
@@ -133,9 +131,11 @@ int main()
 	        userChoice = printMenu(choices, numChoices);
         }      
     }
+    
 
-    printf("\n Thanks for using my knight program!");
-    getchar();
+	//CALCULATIONS
+
+	//OUTPUT
 
     return 0;
 }
@@ -151,8 +151,7 @@ int main()
 void updateBoard(char board[NUM_ROWS][NUM_COLS], struct position currentPosition, struct position* choices, int numChoices)
 {
     int i, row, col;
-   
-    //zero out board 
+    
     initBoard(board);
 
     //update possible choiecs
@@ -173,8 +172,7 @@ void printBoard(char board[NUM_ROWS][NUM_COLS])
     int row, col, hor;
     char rHead = 'A';
     int cHead = 1;
-
-    //Print out Column Header row    
+	
     printf("\n    ");
     for(row = 0; row < NUM_ROWS; row++, rHead++)
     {
@@ -182,7 +180,6 @@ void printBoard(char board[NUM_ROWS][NUM_COLS])
     }
     printf("\n\n");
 
-    //Print out each row
     for(row = 0; row < NUM_ROWS; row++, cHead++)
     {
         printf(" %d |", cHead);
@@ -211,8 +208,7 @@ void printBoard(char board[NUM_ROWS][NUM_COLS])
 void initBoard(char board[NUM_ROWS][NUM_COLS])
 {
     int row, col;
-    
-    //Zero out board
+
     for(row = 0; row < NUM_ROWS; row++)
     {
         for(col = 0; col < NUM_COLS; col++)
@@ -230,10 +226,8 @@ void initBoard(char board[NUM_ROWS][NUM_COLS])
 *******************************************/
 int printMenu(struct position choices[MAX_CHOICES], int numChoices)
 {
-    int i, indexChoice = -1;
-    char buffer[100];
+    int i, indexChoice;
 
-    //Prints out menu selection
     printf(" Where would you like to move (0 to quit)?\n\n" );
     for(i = 0; i < numChoices; i++)
     {
@@ -241,11 +235,13 @@ int printMenu(struct position choices[MAX_CHOICES], int numChoices)
     }
     printf("\n\n ");
 
-    //Use fgets to get whole line, easier to error check
-    fgets(buffer, 100, stdin);
-    if(strlen(buffer) > 2 || strlen(buffer) < 2 || !isdigit(buffer[0])) return -1;
-    else return buffer[0] - '0';
-
+    if(1 == scanf("%d", &indexChoice)
+        return indexChoice;
+    else
+    {
+        while(getchar()!='\n');
+        return -1;
+    }
 }
 
 
@@ -260,20 +256,19 @@ void getValidChoices(struct position currentPosition, struct position* choices, 
     int count = 0;
 	int i, newRow, newCol;
 
-    //Cycle through all possibilities
 	for(i = 0; i < MAX_CHOICES; i++)
     {
         newRow = currentPosition.row + possiblePositions.possibleRow[i];
         newCol = currentPosition.col + possiblePositions.possibleCol[i];
-        
-        //Check if new coords are valid
-        if(newRow >= 0 && newRow < NUM_ROWS &&
-           newCol >= 0 && newCol < NUM_COLS)
-        {
+
+       if(newRow >= 0 && newRow < NUM_ROWS &&
+          newCol >= 0 && newCol < NUM_COLS)
+       {
+
            choices[count].row = newRow;
            choices[count].col = newCol;
            count++;
-        }    
+       }
     }//end for to get choices
 
     *numChoices = count;
@@ -301,137 +296,7 @@ int getRowNum(int col)
     return col + 1; 
 }
 
-
-
-
-/********** Sample Run ***********
-
-     A   B   C   D   E   F   G   H  
-
- 1 |   |   |   |   |   |   |   |   |
-    --- --- --- --- --- --- --- --- 
- 2 |   |   | 2 |   | 3 |   |   |   |
-    --- --- --- --- --- --- --- --- 
- 3 |   | 1 |   |   |   | 4 |   |   |
-    --- --- --- --- --- --- --- --- 
- 4 |   |   |   | k |   |   |   |   |
-    --- --- --- --- --- --- --- --- 
- 5 |   | 5 |   |   |   | 8 |   |   |
-    --- --- --- --- --- --- --- --- 
- 6 |   |   | 6 |   | 7 |   |   |   |
-    --- --- --- --- --- --- --- --- 
- 7 |   |   |   |   |   |   |   |   |
-    --- --- --- --- --- --- --- --- 
- 8 |   |   |   |   |   |   |   |   |
-    --- --- --- --- --- --- --- --- 
-
- Where would you like to move (0 to quit)?
-
- 1.) B3   2.) C2   3.) E2   4.) F3   5.) B5   6.) C6   7.) E6   8.) F5  
-
- 1
-
-     A   B   C   D   E   F   G   H  
-
- 1 | 1 |   | 2 |   |   |   |   |   |
-    --- --- --- --- --- --- --- --- 
- 2 |   |   |   | 3 |   |   |   |   |
-    --- --- --- --- --- --- --- --- 
- 3 |   | k |   |   |   |   |   |   |
-    --- --- --- --- --- --- --- --- 
- 4 |   |   |   | 6 |   |   |   |   |
-    --- --- --- --- --- --- --- --- 
- 5 | 4 |   | 5 |   |   |   |   |   |
-    --- --- --- --- --- --- --- --- 
- 6 |   |   |   |   |   |   |   |   |
-    --- --- --- --- --- --- --- --- 
- 7 |   |   |   |   |   |   |   |   |
-    --- --- --- --- --- --- --- --- 
- 8 |   |   |   |   |   |   |   |   |
-    --- --- --- --- --- --- --- --- 
-
- Where would you like to move (0 to quit)?
-
- 1.) A1   2.) C1   3.) D2   4.) A5   5.) C5   6.) D4  
-
- 6
-
-     A   B   C   D   E   F   G   H  
-
- 1 |   |   |   |   |   |   |   |   |
-    --- --- --- --- --- --- --- --- 
- 2 |   |   | 2 |   | 3 |   |   |   |
-    --- --- --- --- --- --- --- --- 
- 3 |   | 1 |   |   |   | 4 |   |   |
-    --- --- --- --- --- --- --- --- 
- 4 |   |   |   | k |   |   |   |   |
-    --- --- --- --- --- --- --- --- 
- 5 |   | 5 |   |   |   | 8 |   |   |
-    --- --- --- --- --- --- --- --- 
- 6 |   |   | 6 |   | 7 |   |   |   |
-    --- --- --- --- --- --- --- --- 
- 7 |   |   |   |   |   |   |   |   |
-    --- --- --- --- --- --- --- --- 
- 8 |   |   |   |   |   |   |   |   |
-    --- --- --- --- --- --- --- --- 
-
- Where would you like to move (0 to quit)?
-
- 1.) B3   2.) C2   3.) E2   4.) F3   5.) B5   6.) C6   7.) E6   8.) F5  
-
- 7
-
-     A   B   C   D   E   F   G   H  
-
- 1 |   |   |   |   |   |   |   |   |
-    --- --- --- --- --- --- --- --- 
- 2 |   |   |   |   |   |   |   |   |
-    --- --- --- --- --- --- --- --- 
- 3 |   |   |   |   |   |   |   |   |
-    --- --- --- --- --- --- --- --- 
- 4 |   |   |   | 2 |   | 3 |   |   |
-    --- --- --- --- --- --- --- --- 
- 5 |   |   | 1 |   |   |   | 4 |   |
-    --- --- --- --- --- --- --- --- 
- 6 |   |   |   |   | k |   |   |   |
-    --- --- --- --- --- --- --- --- 
- 7 |   |   | 5 |   |   |   | 8 |   |
-    --- --- --- --- --- --- --- --- 
- 8 |   |   |   | 6 |   | 7 |   |   |
-    --- --- --- --- --- --- --- --- 
-
- Where would you like to move (0 to quit)?
-
- 1.) C5   2.) D4   3.) F4   4.) G5   5.) C7   6.) D8   7.) F8   8.) G7  
-
- 6
-
-     A   B   C   D   E   F   G   H  
-
- 1 |   |   |   |   |   |   |   |   |
-    --- --- --- --- --- --- --- --- 
- 2 |   |   |   |   |   |   |   |   |
-    --- --- --- --- --- --- --- --- 
- 3 |   |   |   |   |   |   |   |   |
-    --- --- --- --- --- --- --- --- 
- 4 |   |   |   |   |   |   |   |   |
-    --- --- --- --- --- --- --- --- 
- 5 |   |   |   |   |   |   |   |   |
-    --- --- --- --- --- --- --- --- 
- 6 |   |   | 2 |   | 3 |   |   |   |
-    --- --- --- --- --- --- --- --- 
- 7 |   | 1 |   |   |   | 4 |   |   |
-    --- --- --- --- --- --- --- --- 
- 8 |   |   |   | k |   |   |   |   |
-    --- --- --- --- --- --- --- --- 
-
- Where would you like to move (0 to quit)?
-
- 1.) B7   2.) C6   3.) E6   4.) F7  
-
- 0
-
- Thanks for using my knight program!
-
+/*
+//TODO evidence
 
 */
